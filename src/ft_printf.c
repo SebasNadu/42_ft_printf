@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/20 00:23:33 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/20 00:39:31 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,4 @@ int	ft_printf(const char *strf, ...)
 	}
 	va_end(ap);
 	return (count);
-}
-
-int	main(void)
-{
-	int	count;
-
-	count = ft_printf("hello %s\n", "me");
-	ft_printf("The chars written are %d\n", count);
 }
