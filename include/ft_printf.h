@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:04:52 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:28:31 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/19 21:55:24 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 #endif
