@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/20 00:39:31 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/20 21:55:52 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,38 +51,40 @@ int	print_digit(long n, int base)
 	}
 }
 
-int	print_f(char spec, va_list ap)
+int	print_f(char mode, va_list ap)
 {
 	int	count;
 
 	count = 0;
-	if (spec == 'c')
+	if (mode == 'c')
 		count = print_char(va_arg(ap, int));
-	else if (spec == 's')
+	else if (mode == 's')
 		count += print_str(va_arg(ap, char *));
-	else if (spec == 'd')
+	else if (mode == 'd')
 		count += print_digit((long)(va_arg(ap, int)), 10);
-	else if (spec == 'x')
+	else if (mode == 'x')
 		count += print_digit((long)(va_arg(ap, unsigned int)), 16);
 	else
-		count += write(1, &spec, 1);
+		count += write(1, &mode, 1);
 	return (count);
 }
 
-int	ft_printf(const char *strf, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int		count;
 
-	va_start(ap, strf);
+	if (format == NULL)
+		return (0);
+	va_start(ap, format);
 	count = 0;
-	while (*strf != '\0')
+	while (*format != '\0')
 	{
-		if (*strf == '%')
-			count += print_f(*(++strf), ap);
+		if (*format == '%' && *(format + 1) != '\0')
+			count += print_f(*(++format), ap);
 		else
-			count += write(1, strf, 1);
-		strf++;
+			count += write(1, format, 1);
+		format++;
 	}
 	va_end(ap);
 	return (count);
