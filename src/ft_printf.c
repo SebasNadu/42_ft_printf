@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/21 22:45:00 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:20:21 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ t_print	initialize_tab(void)
 	return (flags);
 }
 
+char	*parse_flags(const char *format, t_print *flags)
+{
+
+}
+
 int	ft_printf(const char *format, ...)
 {
 	int		count;
@@ -64,6 +69,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%' && *(format + 1) != '\0')
 		{
 			flags = initialize_tab();
+			format = parse_flags(++format, &flags);
 			count += print_spec(*(++format), ap);
 		}
 		else
