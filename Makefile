@@ -6,7 +6,11 @@
 #    By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/19 19:12:26 by johnavar          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/05/21 22:57:35 by johnavar         ###   ########.fr        #
+=======
+#    Updated: 2023/05/23 16:48:25 by johnavar         ###   ########.fr        #
+>>>>>>> daac9913c0fdfafedafff89c836dd70425c83c3d
 #                                                                              #
 # **************************************************************************** #
 
