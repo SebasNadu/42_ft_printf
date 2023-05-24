@@ -6,35 +6,35 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/24 12:01:12 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:24:20 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	parse_spec(char spec, va_list ap)
+int	ft_print_spec(char spec, va_list ap, t_print flags)
 {
 	int	count;
 
 	count = 0;
 	if (spec == '%')
-		count += write(1, &spec, 1);
+		count += ft_print_char(spec, flags);
 	else if (spec == 'c')
-		count = print_char(va_arg(ap, int));
+		count = ft_print_char(va_arg(ap, int), flags);
 	else if (spec == 's')
-		count += print_str(va_arg(ap, char *));
+		count += ft_print_str(va_arg(ap, char *), flags);
 	else if (spec == 'p')
-		count += print_ptr((unsigned long int)va_arg(ap, void *));
+		count += ft_print_ptr((unsigned long int)va_arg(ap, void *));
 	else if (spec == 'd' || spec == 'i')
-		count += print_digit((long)(va_arg(ap, int)), 10, spec);
+		count += ft_print_digit((long)(va_arg(ap, int)), 10, spec);
 	else if (spec == 'x' || spec == 'X')
-		count += print_digit((long)(va_arg(ap, unsigned int)), 16, spec);
+		count += ft_print_digit((long)(va_arg(ap, unsigned int)), 16, spec);
 	else if (spec == 'u')
-		count += print_digit((long)(va_arg(ap, unsigned int)), 10, spec);
+		count += ft_print_digit((long)(va_arg(ap, unsigned int)), 10, spec);
 	return (count);
 }
 
-t_print	initialize_tab(void)
+t_print	ft_initialize_tab(void)
 {
 	t_print	flags;
 
@@ -50,7 +50,7 @@ t_print	initialize_tab(void)
 	return (flags);
 }
 
-const char	*parse_flags(const char *format, va_list ap, t_print *flags)
+const char	*ft_parse_flags(const char *format, va_list ap, t_print *flags)
 {
 	while (*(++format) && ft_isflag(*(format)))
 	{
@@ -67,7 +67,7 @@ const char	*parse_flags(const char *format, va_list ap, t_print *flags)
 		if (*(format) == '.')
 			format = ft_flag_prc(format, ap, flags);
 		if (*(format) == '*')
-			*flags = ft_flag_width(ap, *flags);
+			*flags = ft_flag_star(ap, *flags);
 		if (ft_isdigit(*(format)))
 			*flags = ft_flag_digit(*(format), *flags);
 		if (ft_istype(*(format)))
@@ -76,6 +76,7 @@ const char	*parse_flags(const char *format, va_list ap, t_print *flags)
 			break ;
 		}
 	}
+	return (format);
 }
 
 int	ft_printf(const char *format, ...)
@@ -92,9 +93,9 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%' && *(format + 1) != '\0')
 		{
-			flags = initialize_tab();
-			format = parse_flags(format, ap, &flags);
-			count += parse_spec(flags.spc, ap);
+			flags = ft_initialize_tab();
+			format = ft_parse_flags(format, ap, &flags);
+			count += ft_print_spec(flags.spc, ap, flags);
 		}
 		else
 			count += write(1, format, 1);

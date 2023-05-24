@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 00:41:33 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/24 11:01:18 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:53:48 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	main(void)
 	int	num;
 
 	count = 123;
-	printf("print 123 =>%.*-4d\n", 6, count);
-	printf("print 123 =>%.*-4x\n", 6, count);
-	printf("print 123 =>%.*-4c\n", 6, 'h');
-	printf("print 123 =>%.*-4s\n", 6, "hello");
-	printf("print 123 =>%.*-4p\n", 6, &count);
+	printf("print 123 =>%.5d\n", count);
+	printf("print 123 =>%.5x\n", count);
+	printf("print 123 =>%.5c\n", 'h');
+	printf("print 123 =>%.5s\n", NULL);
+	printf("print 123 =>%.5p\n", &count);
 	/*count = ft_printf("hello %s\n", "me");*/
 	/*ft_printf("The chars written in ft_printf are %d\n", count);*/
 	/*ft_printf("Now on Hexadecimal %x or %X\n", count, count);*/

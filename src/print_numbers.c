@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_spec.c                                       :+:      :+:    :+:   */
+/*   print_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 22:43:12 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/21 22:44:11 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:25:46 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
-int	print_char(int c)
-{
-	return (write(1, &c, 1));
-}
-
-int	print_str(char *str)
+int	ft_print_pad(int width, int size, int zero)
 {
 	int	count;
 
 	count = 0;
-	while (*str)
+	while (width - size > 0)
 	{
-		print_char((int)*str);
-		count++;
-		str++;
+		if (zero)
+			count += write(1, "0", 1);
+		else
+			count += write(1, " ", 1);
+		width--;
 	}
 	return (count);
 }
 
-int	print_digit(long n, int base, char mode)
+int	ft_print_digit(long n, int base, char mode)
 {
 	int		count;
 	char	*symbols;
@@ -54,22 +51,22 @@ int	print_digit(long n, int base, char mode)
 	}
 }
 
-int	print_addr(unsigned long int addr)
+int	ft_print_addr(unsigned long int addr)
 {
 	int		count;
 	char	*symbols;
 
 	symbols = "0123456789abcdef";
 	if (addr < 16)
-		return (print_char(symbols[addr]));
+		return (ft_print_char(symbols[addr]));
 	else
 	{
-		count = print_addr(addr / 16);
-		return (count + print_addr(addr % 16));
+		count = ft_print_addr(addr / 16);
+		return (count + ft_print_addr(addr % 16));
 	}
 }
 
-int	print_ptr(unsigned long int ptr)
+int	ft_print_ptr(unsigned long int ptr)
 {
 	int	count;
 
@@ -77,6 +74,6 @@ int	print_ptr(unsigned long int ptr)
 	if (ptr == 0)
 		count += write(1, "0", 1);
 	else
-		count += print_addr(ptr);
+		count += ft_print_addr(ptr);
 	return (count);
 }

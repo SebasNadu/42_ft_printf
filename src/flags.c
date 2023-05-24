@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:11:33 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/24 12:00:53 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:00:14 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,24 @@ const char	*ft_flag_prc(const char *format, va_list ap, t_print *flags)
 		format++;
 	}
 	return (format);
+}
+
+t_print	ft_flag_star(va_list ap, t_print flags)
+{
+	flags.star = 1;
+	flags.width = va_arg(ap, int);
+	if (flags.width < 0)
+	{
+		flags.left = 1;
+		flags.width *= -1;
+	}
+	return (flags);
+}
+
+t_print	ft_flag_digit(char c, t_print flags)
+{
+	if (flags.star == 1)
+		flags.width = 0;
+	flags.width = (flags.width * 10) + (c - '0');
+	return (flags);
 }
