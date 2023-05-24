@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:48:41 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/24 09:37:05 by johnavar         ###   ########.fr       */
+/*   Created: 2023/05/24 11:11:33 by johnavar          #+#    #+#             */
+/*   Updated: 2023/05/24 12:00:53 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_isspec(int c)
+t_print	ft_flag_left(t_print flags)
 {
-	if (c == '-' || c == '0' || c == '.' || c == '#'
-		|| c == '*' || c == ' ' || c == '+')
-		return (1);
-	return (0);
+	flags.left = 1;
+	flags.zero = 0;
+	return (flags);
 }
 
-int	ft_istype(int c)
+const char	*ft_flag_prc(const char *format, va_list ap, t_print *flags)
 {
-	if (c == 's' || c == 'c' || c == 'p' || c == 'd' || c == 'i'
-		|| c == 'u' || c == 'x' || c == 'X' || c == '%')
-		return (1);
-	return (0);
-}
-
-int	ft_isflag(int c)
-{
-	return (ft_istype(c) || ft_isdigit(c) || ft_isspec(c));
+	if (*(++format) == '*')
+	{
+		flags->prc = va_arg(ap, int);
+		return (++format);
+	}
+	flags->prc = 0;
+	while (ft_isdigit(*(format)))
+	{
+		flags->prc = (flags->prc * 10) + (*(format) - '0');
+		format++;
+	}
+	return (format);
 }

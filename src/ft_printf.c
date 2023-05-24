@@ -6,11 +6,11 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/24 09:22:58 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:01:12 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	parse_spec(char spec, va_list ap)
 {
@@ -50,17 +50,31 @@ t_print	initialize_tab(void)
 	return (flags);
 }
 
-char	*parse_flags(const char *format, t_print *flags)
+const char	*parse_flags(const char *format, va_list ap, t_print *flags)
 {
-	while ((*(++format) || ft_isflag(*(format)) || ft_isdigit(*(format)))
-		&& !ft_isspec(*(format)))
+	while (*(++format) && ft_isflag(*(format)))
 	{
 		if (*(format) == '-')
-			flags->left = 1;
-		if (*(format) == '0')
+			*flags = ft_flag_left(*flags);
+		if (*(format) == ' ')
+			flags->spc = 1;
+		if (*(format) == '+')
+			flags->plus = 1;
+		if (*(format) == '#')
+			flags->hash = 1;
+		if (*(format) == '0' && flags->left == 0 && flags->width == 0)
 			flags->zero = 1;
 		if (*(format) == '.')
-			flags->prc = 1;
+			format = ft_flag_prc(format, ap, flags);
+		if (*(format) == '*')
+			*flags = ft_flag_width(ap, *flags);
+		if (ft_isdigit(*(format)))
+			*flags = ft_flag_digit(*(format), *flags);
+		if (ft_istype(*(format)))
+		{
+			flags->spec = *(format);
+			break ;
+		}
 	}
 }
 
@@ -79,8 +93,8 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%' && *(format + 1) != '\0')
 		{
 			flags = initialize_tab();
-			format = parse_flags(format, &flags);
-			count += print_spec(*(format), ap);
+			format = parse_flags(format, ap, &flags);
+			count += parse_spec(flags.spc, ap);
 		}
 		else
 			count += write(1, format, 1);
