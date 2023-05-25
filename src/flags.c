@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:11:33 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/24 14:00:14 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:23:57 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@ t_print	ft_flag_left(t_print flags)
 	return (flags);
 }
 
-const char	*ft_flag_prc(const char *format, va_list ap, t_print *flags)
+const char	*ft_flag_precision(const char *format, va_list ap, t_print *flags)
 {
+	if (flags->zero == 1)
+		flags->zero = 0;
 	if (*(++format) == '*')
 	{
-		flags->prc = va_arg(ap, int);
+		flags->precision = va_arg(ap, int);
 		return (++format);
 	}
-	flags->prc = 0;
+	flags->precision = 0;
 	while (ft_isdigit(*(format)))
 	{
-		flags->prc = (flags->prc * 10) + (*(format) - '0');
+		flags->precision = (flags->precision * 10) + (*(format) - '0');
 		format++;
 	}
 	return (format);
