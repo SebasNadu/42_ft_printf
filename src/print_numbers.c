@@ -6,11 +6,11 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 22:43:12 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/25 11:43:21 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:52:28 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_nbr_len(unsigned long int n, int base)
 {
@@ -27,22 +27,6 @@ int	ft_nbr_len(unsigned long int n, int base)
 		len++;
 	}
 	return (len);
-}
-
-int	ft_print_pad(int width, int size, int zero)
-{
-	int	count;
-
-	count = 0;
-	while (width - size > 0)
-	{
-		if (zero)
-			count += write(1, "0", 1);
-		else
-			count += write(1, " ", 1);
-		width--;
-	}
-	return (count);
 }
 
 int	ft_print_digit(long n, int base, char mode)
@@ -88,7 +72,7 @@ int	ft_print_i_wzero(long n, t_print *flags)
 	return (count);
 }
 
-int	ft_print_i(long n, t_print flags)
+int	ft_print_i(long n, char spec, t_print flags)
 {
 	int	count;
 
@@ -105,13 +89,13 @@ int	ft_print_i(long n, t_print flags)
 	if (flags.precision >= 0)
 		count += ft_print_pad(flags.precision - 1, ft_nbr_len(n, 10) - 1, 1);
 	if (n < 0)
-		count += ft_print_digit(-n, 10, 'i');
+		count += ft_print_digit(-n, 10, spec);
 	else
-		count += ft_print_digit(n, 10, 'i');
+		count += ft_print_digit(n, 10, spec);
 	return (count);
 }
 
-int	ft_print_int(long n, t_print flags)
+int	ft_print_int(long n, char spec, t_print flags)
 {
 	int		count;
 
@@ -124,7 +108,7 @@ int	ft_print_int(long n, t_print flags)
 	if (flags.zero == 1)
 		count += ft_print_i_wzero(n, &flags);
 	if (flags.left == 1)
-		count += ft_print_i(n, flags);
+		count += ft_print_i(n, spec, flags);
 	if (flags.precision >= 0 && flags.precision < ft_nbr_len(n, 10))
 		flags.precision = ft_nbr_len(n, 10);
 	if (flags.precision >= 0)
@@ -138,7 +122,7 @@ int	ft_print_int(long n, t_print flags)
 		count += ft_print_pad(flags.width - flags.plus - flags.space,
 				ft_nbr_len(n, 10), flags.zero);
 	if (flags.left == 0)
-		count += ft_print_i(n, flags);
+		count += ft_print_i(n, spec, flags);
 	return (count);
 }
 

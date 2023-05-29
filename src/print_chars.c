@@ -6,26 +6,34 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:17:32 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/25 09:22:26 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:59:54 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_print.h"
+#include "../include/ft_printf.h"
 
-int	ft_print_char(int c, t_print flags)
+int	ft_print_c(char c)
+{
+	if (write(1, &c, 1) == -1)
+		return (0);
+	return (1);
+}
+
+int	ft_print_char(char c, t_print *flags)
 {
 	int	count;
 
 	count = 0;
-	if (flags.left == 1)
-		count += write(1, &c, 1);
-	count += ft_print_pad(flags.width, 1, flags.zero);
-	if (flags.left == 0)
-		count += write(1, &c, 1);
+	if (flags->left == 1)
+		count += ft_print_c(c);
+	if (flags->width > 1)
+		count += ft_print_pad(flags->width, 1, flags->zero);
+	if (flags->left == 0)
+		count += ft_print_c(c);
 	return (count);
 }
 
-int	ft_print_s_wprecision(const char *str, int precision)
+int	ft_print_s_precision(const char *str, int precision)
 {
 	int	count;
 

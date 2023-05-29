@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:04:52 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/25 09:23:08 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/29 22:01:11 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,20 @@ typedef struct s_print
 	int			star;
 }				t_print;
 
-int			ft_printf(const char *strf, ...);
-int			ft_print_spec(char spec, va_list ap, t_print flags);
-int			ft_print_digit(long n, int base, char mode);
-int			ft_print_char(int c, t_print flags);
-int			ft_print_str(char *str, t_print flags);
-int			ft_print_ptr(unsigned long int ptr, t_print flags);
-const char	*ft_flag_precision(const char *format, va_list ap, t_print *flags);
-int			ft_print_s(const char *str);
-int			ft_print_s_wprecision(const char *str, int precision);
-int			ft_print_addr(unsigned long int addr);
-t_print		ft_initialize_tab(void);
-const char	*ft_parse_flags(const char *format, va_list ap, t_print *flags);
-int			ft_isspec(int c);
-int			ft_istype(int c);
-int			ft_isflag(int c);
-t_print		ft_flag_left(t_print flags);
-const char	*ft_flag_prc(const char *format, va_list ap, t_print *flags);
-t_print		ft_flag_star(va_list ap, t_print flags);
-t_print		ft_flag_digit(char c, t_print flags);
+int		ft_printf(const char *strf, ...);
+int		ft_parse_format(const char *format, va_list *ap);
+int		ft_print_spec(char spec, va_list *ap, t_print *flags);
+t_print	ft_initialize_tab(void);
+int		ft_parse_flags(const char *format, int i, va_list *ap, t_print *flags);
+int		ft_isflag(int c);
+int		ft_istype(int c);
+int		ft_isspec(int c);
+void	ft_flag_left(t_print *flags);
+void	ft_flag_star(va_list *ap, t_print *flags);
+int		ft_flag_prec(const char *format, int i, va_list *ap, t_print *flags);
+void	ft_flag_digit(char c, t_print *flags);
+int		ft_print_c(char c);
+int		ft_print_char(char c, t_print *flags);
+int		ft_print_pad(int width, int size, int zero);
 
 #endif

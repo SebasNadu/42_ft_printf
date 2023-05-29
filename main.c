@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 00:41:33 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/25 11:40:24 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:57:03 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,24 @@ int	main(void)
 	int	num;
 
 	count = -1;
-	printf("print 123 =>%0*-8d\n", 10, count);
-	printf("print 123 =>%.*x\n", -5, count);
-	printf("print 123 =>%.*c\n", -5, 'h');
-	printf("print 123 =>%.*s\n", -5, NULL);
-	printf("print 123 =>%.*p\n", -5, &count);
-	/*count = ft_printf("hello %s\n", "me");*/
-	/*ft_printf("The chars written in ft_printf are %d\n", count);*/
-	/*ft_printf("Now on Hexadecimal %x or %X\n", count, count);*/
-	/*count = ft_printf("%d\n", INT32_MIN);*/
-	/*ft_printf("The chars written in printf are %d\n", count);*/
-	/*ft_printf("Now on Hexadecimal %x or %X\n", count, count);*/
-	/*count = printf("%d\n", INT32_MIN);*/
-	/*printf("The chars written in printf are %\n", count);*/
-	/*printf("Now on Hexadecimal %x or %X\n", count, count);*/
-	/*count = ft_printf("%u\n", UINT32_MAX);*/
-	/*ft_printf("The chars written in ft_printf are %d\n", count);*/
-	/*count = printf("%u\n", UINT32_MAX);*/
-	/*printf("The chars written in printf are %d\n", count);*/
-	/*ft_printf("The address of the counter is %p\n", &count);*/
-	/*printf("The address of the counter is %p\n", &count);*/
+	num = 5;
+	printf("printf char simple=>%c\n", 'c');
+	ft_printf("fprint char simple=>%c\n", 'c');
+	printf("printf char *=>%*c\n", num, 'c');
+	ft_printf("fprint char *=>%*c\n", num, 'c');
+	printf("printf char -=>%-5c\n", 'c');
+	ft_printf("fprint char -=>%-5c\n", 'c');
+	printf("printf char -*=>%-*c\n", num, 'c');
+	ft_printf("fprint char -*=>%-*c\n", num, 'c');
+	printf("printf char 0=>%05c\n", 'c');
+	ft_printf("fprint char 0=>%05c\n", 'c');
+	printf("printf char 0*=>%0*c\n", num, 'c');
+	ft_printf("fprint char 0*=>%0*c\n", num, 'c');
+	printf("printf char .=>%.5c\n", 'c');
+	ft_printf("fprint char .=>%.5c\n", 'c');
+	printf("printf char .*=>%.*c\n", num, 'c');
+	ft_printf("fprint char .*=>%.*c\n", num, 'c');
+	printf("printf char *=>%*c\n", num, 'c');
+	ft_printf("fprint char *=>%*c\n", num, 'c');
 	return (count);
 }
