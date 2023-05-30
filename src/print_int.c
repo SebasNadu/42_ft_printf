@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 22:43:12 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 11:48:15 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 15:45:04 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static int	ft_print_i_wzero(long n, t_print *flags)
 	if (n < 0 && flags->precision == -1)
 	{
 		count += write(1, "-", 1);
-		flags->width--;
+		/*flags->width--;*/
 	}
 	else if (flags->plus == 1)
 		count += write(1, "+", 1);
 	else if (flags->space == 1)
 	{
 		count += write(1, " ", 1);
-		flags->width--;
+		/*flags->width--;*/
 	}
 	return (count);
 }
@@ -45,9 +45,9 @@ static int	ft_print_i(long n, char spec, t_print *flags)
 	else if (flags->plus == 1 && flags->zero == 0)
 		count += write(1, "+", 1);
 	else if (flags->space == 1 && flags->zero == 0)
-		count += write(1, "+", 1);
+		count += write(1, " ", 1);
 	if (flags->precision >= 0)
-		count += ft_print_pad(flags->precision - 1, ft_nbr_len(n, 10) - 1, 1);
+		count += ft_print_pad(flags->precision, ft_nbr_len(n, 10) - 1, 1);
 	if (n < 0)
 		count += ft_print_digit(-n, 10, spec);
 	else

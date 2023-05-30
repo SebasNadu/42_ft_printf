@@ -6,13 +6,13 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:39:30 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/05/30 11:40:00 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 15:16:50 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_nbr_len(unsigned long int n, int base)
+int	ft_nbr_len(long int n, int base)
 {
 	int	len;
 
@@ -20,7 +20,10 @@ int	ft_nbr_len(unsigned long int n, int base)
 	if (n == 0)
 		return (1);
 	if (n < 0)
+	{
 		n *= -1;
+		len++;
+	}
 	while (n >= 1)
 	{
 		n /= base;
