@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:47:55 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/05/30 11:48:20 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 17:48:02 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ int	ft_print_ptr(unsigned long int ptr, t_print flags)
 	if (flags.left == 0)
 		count += ft_print_p(ptr);
 	return (count);
+}
+
+int ftt_print_hex(long n, int base, t_print *flags)
+{
+	
 }

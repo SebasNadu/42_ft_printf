@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 00:41:33 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 12:19:45 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 15:57:17 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,11 @@ int	main(void)
 	ft_printf("fprint -int .12=>%.12i\n", INT32_MIN);
 	printf("printf -int .*=>%.*i\n", num2, INT32_MIN);
 	ft_printf("fprint -int .*=>%.*i\n", num2, INT32_MIN);
+	// Integer Hexadecimal
+	printf("printf hex x=>%x\n", INT32_MAX);
+	ft_printf("fprint hex x=>%x\n", INT32_MAX);
+	printf("printf hex X=>%X\n", INT32_MAX);
+	ft_printf("fprint hex X=>%X\n", INT32_MAX);
+
 	return (count);
 }

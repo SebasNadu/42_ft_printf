@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 11:52:38 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 15:59:39 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	ft_print_spec(char spec, va_list *ap, t_print *flags)
 		count += ft_print_string(va_arg(*ap, char *), flags);
 	else if (spec == 'd' || spec == 'i')
 		count += ft_print_int((long)(va_arg(*ap, int)), spec, flags);
-	/* else if (spec == 'x' || spec == 'X')
-		count += ft_print_digit((long)(va_arg(ap, unsigned int)), 16, spec);
-	else if (spec == 'p')
-		count += ft_print_ptr((unsigned long int)va_arg(ap, void *), *flags);
-	else if (spec == 'u')
-		count += ft_print_digit((long)(va_arg(ap, unsigned int)), 10, spec); */
+	else if (spec == 'x' || spec == 'X')
+		count += ft_print_digit((long)(va_arg(*ap, unsigned int)), 16, flags->spec);
+	/*else if (spec == 'p')*/
+		/*count += ft_print_ptr((unsigned long int)va_arg(ap, void *), *flags);*/
+	/*else if (spec == 'u')*/
+		/*count += ft_print_digit((long)(va_arg(ap, unsigned int)), 10, spec);*/
 	return (count);
 }
 
