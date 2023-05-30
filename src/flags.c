@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:11:33 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/29 22:03:43 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 11:09:02 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int	ft_flag_prec(const char *format, int i, va_list *ap, t_print *flags)
 	if (format[j] == '*')
 	{
 		flags->precision = va_arg(*ap, int);
-		return (i++);
+		return (++j);
 	}
 	flags->precision = 0;
-	while (ft_isdigit(format[i]))
+	while (ft_isdigit(format[j]))
 	{
-		flags->precision = (flags->precision * 10) + (format[i] - '0');
-		i++;
+		flags->precision = (flags->precision * 10) + (format[j] - '0');
+		j++;
 	}
-	return (i);
+	return (j);
 }
 
 void	ft_flag_star(va_list *ap, t_print *flags)

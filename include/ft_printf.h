@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:04:52 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/29 22:01:11 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/30 11:40:38 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ void	ft_flag_digit(char c, t_print *flags);
 int		ft_print_c(char c);
 int		ft_print_char(char c, t_print *flags);
 int		ft_print_pad(int width, int size, int zero);
+int		ft_print_string(char *str, t_print *flags);
+int		ft_print_int(long n, char spec, t_print *flags);
+int		ft_nbr_len(unsigned long int n, int base);
+int		ft_print_digit(long n, int base, char mode);
 
 #endif
