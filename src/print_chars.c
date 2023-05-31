@@ -6,24 +6,11 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:17:32 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 11:50:08 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/05/31 17:18:41 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-int	ft_print_s(const char *str)
-{
-	int	count;
-
-	if (str == NULL)
-		return (write(1, "(null)", 6));
-	count = 0;
-	while (str[count])
-		count++;
-	write(1, str, count);
-	return (count);
-}
 
 int	ft_print_c(char c)
 {

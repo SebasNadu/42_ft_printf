@@ -6,7 +6,7 @@
 #    By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/19 19:12:26 by johnavar          #+#    #+#              #
-#    Updated: 2023/05/30 11:51:22 by sebasnadu        ###   ########.fr        #
+#    Updated: 2023/05/31 18:08:37 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ AR			= ar -rcs
 
 # Sources
 
-SRC_FILES	= ft_printf ft_printf_utils flags print_chars print_int number_utils
+SRC_FILES	= ft_printf ft_printf_utils flags print_chars print_int print_hex number_utils
 SRCS 		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS 		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		= .cache_exists

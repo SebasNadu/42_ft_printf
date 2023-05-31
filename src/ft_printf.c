@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:01:25 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 15:59:39 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:03:41 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_print_spec(char spec, va_list *ap, t_print *flags)
 	else if (spec == 'd' || spec == 'i')
 		count += ft_print_int((long)(va_arg(*ap, int)), spec, flags);
 	else if (spec == 'x' || spec == 'X')
-		count += ft_print_digit((long)(va_arg(*ap, unsigned int)), 16, flags->spec);
+		count += ft_print_hex((long)(va_arg(*ap, unsigned int)), flags);
 	/*else if (spec == 'p')*/
 		/*count += ft_print_ptr((unsigned long int)va_arg(ap, void *), *flags);*/
 	/*else if (spec == 'u')*/

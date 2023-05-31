@@ -6,60 +6,68 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:47:55 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/05/30 17:48:02 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:24:01 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_print_addr(unsigned long int addr)
+static int	ft_print_x_prefix(int spec)
 {
-	int		count;
-	char	*symbols;
-
-	symbols = "0123456789abcdef";
-	if (addr < 16)
-		return (write(1, &symbols[addr], 1));
+	if (spec == 'X')
+		ft_print_s("0X");
 	else
-	{
-		count = ft_print_addr(addr / 16);
-		return (count + ft_print_addr(addr % 16));
-	}
+		ft_print_s("0x");
+	return (2);
 }
 
-int	ft_print_p(unsigned long int p)
+static int	ft_print_x(long n, t_print *flags)
 {
 	int	count;
 
 	count = 0;
-	if (p == 0)
+	if (flags->zero == 0 && flags->hash == 1 && n != 0)
+		count += ft_print_x_prefix(flags->spec);
+	if (flags->precision >= 0)
+		count += ft_print_pad(flags->precision, ft_nbr_len(n, 16), 1);
+	count += ft_print_digit(n, 16, flags->spec);
+	return (count);
+}
+
+static int	ft_print_x_width(long n, t_print *flags)
+{
+	int	count;
+
+	count = 0;
+	if (flags->precision >= 0 && flags->precision < ft_nbr_len(n, 16))
+		flags->precision = ft_nbr_len(n, 16);
+	if (flags->precision >= 0)
 	{
-		count += ft_print_s(NNULL);
+		flags->width -= flags->precision;
+		count += ft_print_pad(flags->width, 0, 0);
+	}
+	else
+		count += ft_print_pad(flags->width,
+				ft_nbr_len(n, 16) + (flags->hash * 2), flags->zero);
+	return (count);
+}
+
+int	ft_print_hex(long n, t_print *flags)
+{
+	int	count;
+
+	count = 0;
+	if (flags->precision == 0 && n == 0)
+	{
+		count += ft_print_pad(flags->width, 0, flags->zero);
 		return (count);
 	}
-	count += write(1, "0x", 2);
-	count += ft_print_addr(p);
+	if (flags->zero == 1 && flags->hash == 1 && n != 0)
+		count += ft_print_x_prefix(flags->spec);
+	if (flags->left == 1)
+		count += ft_print_x(n, flags);
+	count += ft_print_x_width(n, flags);
+	if (flags->left == 0)
+		count += ft_print_x(n, flags);
 	return (count);
-}
-
-int	ft_print_ptr(unsigned long int ptr, t_print flags)
-{
-	int	count;
-
-	count = 0;
-	if (ptr == 0)
-		flags.width -= ft_strlen(NNULL) - 1;
-	else
-		flags.width -= 2;
-	if (flags.left == 1)
-		count += ft_print_p(ptr);
-	count += ft_print_pad(flags.width, ft_nbr_len(ptr, 16), 0);
-	if (flags.left == 0)
-		count += ft_print_p(ptr);
-	return (count);
-}
-
-int ftt_print_hex(long n, int base, t_print *flags)
-{
-	
 }

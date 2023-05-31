@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:04:52 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 15:06:57 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:03:35 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int		ft_print_c(char c);
 int		ft_print_char(char c, t_print *flags);
 int		ft_print_pad(int width, int size, int zero);
 int		ft_print_string(char *str, t_print *flags);
+int		ft_print_s(char *str);
 int		ft_print_int(long n, char spec, t_print *flags);
 int		ft_nbr_len(long int n, int base);
 int		ft_print_digit(long n, int base, char mode);
+int		ft_print_hex(long n, t_print *flags);
 
 #endif
