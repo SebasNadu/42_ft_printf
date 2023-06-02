@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 22:43:12 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/31 17:39:55 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/06/02 23:15:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ static int	ft_print_i(long n, char spec, t_print *flags)
 	else if (flags->space == 1 && flags->zero == 0)
 		count += write(1, " ", 1);
 	if (flags->precision >= 0)
-		count += ft_print_pad(flags->precision, ft_nbr_len(n, 10) - 1, 1);
+	{
+		if (n < 0)
+			count += ft_print_pad(flags->precision, ft_nbr_len(n, 10) - 1, 1);
+		else
+			count += ft_print_pad(flags->precision, ft_nbr_len(n, 10), 1);
+	}
 	if (n < 0)
 		count += ft_print_digit(-n, 10, spec);
 	else
@@ -55,11 +60,16 @@ static int	ft_print_i_width(long n, t_print *flags, int base)
 
 	count = 0;
 	if (flags->precision >= 0 && flags->precision < ft_nbr_len(n, base))
-		flags->precision = ft_nbr_len(n, base);
+	{
+		if (n < 0)
+			flags->precision = ft_nbr_len(n, base) - 1;
+		else
+			flags->precision = ft_nbr_len(n, base);
+	}
 	if (flags->precision >= 0)
 	{
 		flags->width -= flags->precision;
-		if (n < 0 && flags->left == 0)
+		if (n < 0)
 			flags->width -= 1;
 		count += ft_print_pad(flags->width, 0, 0);
 	}

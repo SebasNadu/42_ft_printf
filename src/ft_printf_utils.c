@@ -6,27 +6,11 @@
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:48:41 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/30 15:47:18 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:36:51 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-int	ft_print_pad(int width, int size, int zero)
-{
-	int	count;
-
-	count = 0;
-	while (width - size > 0)
-	{
-		if (zero)
-			count += write(1, "0", 1);
-		else
-			count += write(1, " ", 1);
-		width--;
-	}
-	return (count);
-}
 
 int	ft_isspec(int c)
 {

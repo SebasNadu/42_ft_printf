@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:54:04 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/05/31 17:54:25 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/06/02 22:01:56 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,25 @@ int	ft_print_p(unsigned long int p)
 		count += ft_print_s(NNULL);
 		return (count);
 	}
-	count += write(1, "0x", 2);
+	count += ft_print_s("0x");
 	count += ft_print_addr(p);
 	return (count);
 }
 
-int	ft_print_ptr(unsigned long int ptr, t_print flags)
+int	ft_print_ptr(unsigned long int ptr, t_print *flags)
 {
 	int	count;
 
 	count = 0;
 	if (ptr == 0)
-		flags.width -= ft_strlen(NNULL) - 1;
+		flags->width -= ft_strlen(NNULL) - 1;
 	else
-		flags.width -= 2;
-	if (flags.left == 1)
+		flags->width -= 2;
+	if (flags->left == 1)
 		count += ft_print_p(ptr);
-	count += ft_print_pad(flags.width, ft_nbr_len(ptr, 16), 0);
-	if (flags.left == 0)
+	if (count < flags->width)
+		count += ft_print_pad(flags->width, ft_nbr_len(ptr, 16), 0);
+	if (flags->left == 0)
 		count += ft_print_p(ptr);
 	return (count);
 }

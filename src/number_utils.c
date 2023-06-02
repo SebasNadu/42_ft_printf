@@ -6,11 +6,27 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:39:30 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/05/31 17:19:04 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/06/02 18:22:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+int	ft_print_pad(int width, int size, int zero)
+{
+	int	count;
+
+	count = 0;
+	while (width - size > 0)
+	{
+		if (zero)
+			count += write(1, "0", 1);
+		else
+			count += write(1, " ", 1);
+		width--;
+	}
+	return (count);
+}
 
 int	ft_print_s(char *str)
 {
@@ -37,7 +53,7 @@ int	ft_nbr_len(long int n, int base)
 		n *= -1;
 		len++;
 	}
-	while (n >= 1)
+	while (n > 0)
 	{
 		n /= base;
 		len++;

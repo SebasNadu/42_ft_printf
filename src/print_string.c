@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_chars.c                                      :+:      :+:    :+:   */
+/*   print_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:17:32 by johnavar          #+#    #+#             */
-/*   Updated: 2023/05/31 17:18:41 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/06/02 11:30:54 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-int	ft_print_c(char c)
-{
-	if (write(1, &c, 1) == -1)
-		return (0);
-	return (1);
-}
-
-int	ft_print_char(char c, t_print *flags)
-{
-	int	count;
-
-	count = 0;
-	if (flags->left == 1)
-		count += ft_print_c(c);
-	if (flags->width > 1)
-		count += ft_print_pad(flags->width, 1, flags->zero);
-	if (flags->left == 0)
-		count += ft_print_c(c);
-	return (count);
-}
 
 static int	ft_print_s_precision(const char *str, int precision)
 {
@@ -59,6 +38,8 @@ static int	ft_print_str(const char *str, t_print *flags)
 	return (count);
 }
 
+#if defined(__linux__) || defined(__gnu_linux__)
+
 int	ft_print_string(char *str, t_print *flags)
 {
 	int	count;
@@ -83,3 +64,26 @@ int	ft_print_string(char *str, t_print *flags)
 		count += ft_print_str(str, flags);
 	return (count);
 }
+
+#else
+
+int	ft_print_string(char *str, t_print *flags)
+{
+	int	count;
+
+	count = 0;
+	if (str == NULL)
+		str = "(null)";
+	if (flags->precision >= 0 && (size_t)flags->precision > ft_strlen(str))
+		flags->precision = ft_strlen(str);
+	if (flags->left == 1)
+		count += ft_print_str(str, flags);
+	if (flags->precision >= 0)
+		count += ft_print_pad(flags->width, flags->precision, 0);
+	else
+		count += ft_print_pad(flags->width, ft_strlen(str), 0);
+	if (flags->left == 0)
+		count += ft_print_str(str, flags);
+	return (count);
+}
+#endif
