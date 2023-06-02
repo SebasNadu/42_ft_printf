@@ -6,13 +6,13 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:54:04 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/06/02 22:01:56 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/06/03 00:33:36 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_print_addr(unsigned long int addr)
+static int	ft_print_addr(unsigned long int addr)
 {
 	int		count;
 	char	*symbols;
@@ -27,7 +27,7 @@ int	ft_print_addr(unsigned long int addr)
 	}
 }
 
-int	ft_print_p(unsigned long int p)
+static int	ft_print_p(unsigned long int p)
 {
 	int	count;
 

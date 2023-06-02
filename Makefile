@@ -6,7 +6,7 @@
 #    By: johnavar <johnavar@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/19 19:12:26 by johnavar          #+#    #+#              #
-#    Updated: 2023/06/02 17:11:34 by sebasnadu        ###   ########.fr        #
+#    Updated: 2023/06/03 00:08:28 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ WHITE = \033[0;97m
 NAME		= libftprintf.a
 SRC_DIR		= src/
 OBJ_DIR		= objs/
+INCLUDE		= include
 LIBFT		= libft
 CC			= gcc
 CC_FLAGS	= -Wall -Werror -Wextra
@@ -35,10 +36,14 @@ AR			= ar -rcs
 
 # Sources
 
-SRC_FILES	= ft_printf ft_printf_utils flags print_char print_string print_int \
-			print_hex print_addr print_unsig number_utils
+SRC_FILES	= ft_printf ft_printf_utils flags print_char print_string \
+			print_int print_hex print_addr print_unsig number_utils
+
 SRCS 		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS 		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+# Rules
+
 OBJF		= .cache_exists
 
 all: $(NAME)
@@ -48,12 +53,11 @@ $(NAME): $(OBJS)
 		@cp $(LIBFT)/libft.a .
 		@mv libft.a $(NAME)
 		@$(AR) $(NAME) $(OBJS) >/dev/null 2>&1
-		@printf "\033[2K\r${GREEN}[END]${CYAN} $(NAME) $(DEF_COLOR)"
-
+		@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR))"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 		@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-		@$(CC) $(CC_FLAGS) -c $< -o $@
+		@$(CC) $(CC_FLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJF):
 		@mkdir -p $(OBJ_DIR)
@@ -62,12 +66,12 @@ bonus: all
 
 clean:
 		@$(RM) $(OBJ_DIR)
-		@make -C $(LIBFT) clean
+		@make clean -C $(LIBFT)
 		@echo "$(BLUE)ft_printf object files cleaned!$(DEF_COLOR)"
 
 fclean: clean
 		@$(RM) $(NAME)
-		@make -C $(LIBFT) fclean
+		@make fclean -C $(LIBFT)
 		@echo "$(CYAN)ft_printf executable files cleaned!$(DEF_COLOR)"
 		@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
 
@@ -75,6 +79,6 @@ re: fclean all
 		@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
 
 norm:
-		@norminette $(SRCS) $(INCLUDE) | grep -v Norme -B1 || true
+		@norminette $(SRCS) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
 
 .PHONY: all clean fclean re bonus norm
