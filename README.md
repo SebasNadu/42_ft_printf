@@ -1,3 +1,7 @@
+<picture>
+	<img alt="libft" src="https://github.com/SebasNadu/42_ft_printf/assets/98430438/9f333e2c-3402-43ab-94aa-40c9d6ca640f">
+</picture>
+
 ## About the project
 
 For this project we are asked to replicate the general behavior of the famous printf function, and create a library for it use.
